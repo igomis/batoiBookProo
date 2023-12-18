@@ -11,11 +11,11 @@ class Sale extends Model
 
     public function book()
     {
-        return $this->belongsTo(Book::class, 'idBook');
+        return $this->belongsTo(Book::class);
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'idUser');
+        return $this->belongsTo(User::class);
     }
 }

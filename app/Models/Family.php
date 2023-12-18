@@ -11,6 +11,6 @@ class Family extends Model
 
     public function courses()
     {
-        return $this->hasMany(Course::class, 'idFamily');
+        return $this->hasMany(Course::class);
     }
 }

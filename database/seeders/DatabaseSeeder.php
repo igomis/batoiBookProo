@@ -22,6 +22,9 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             FamilySeeder::class,
             CoursesSeeder::class,
+            ModulesSeeder::class,
+            BooksSeeder::class,
+            SalesSeeder::class,
         ]);
     }
 }

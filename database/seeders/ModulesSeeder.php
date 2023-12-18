@@ -25,7 +25,7 @@ class ModulesSeeder extends Seeder
                 'code' => $item['code'],
                 'cliteral' => $item['cliteral'],
                 'vliteral' => $item['vliteral'],
-                'courses_id' => $item['idCycle'],
+                'course_id' => $item['idCycle'],
             ]);
         }
     }

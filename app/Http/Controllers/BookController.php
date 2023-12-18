@@ -7,59 +7,49 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Mostra la llista de llibres
     public function index()
     {
-        //
+        $books = Book::paginate(20);
+        return view('books.index', compact('books'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Mostra el formulari per a crear un nou llibre
     public function create()
     {
-        //
+        return view('books.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Emmagatzema un nou llibre
     public function store(Request $request)
     {
-        //
+        Book::create($request->all());
+        return redirect()->route('books.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
+    // Mostra un llibre específic
     public function show(Book $book)
     {
-        //
+        return view('books.show', compact('book'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    // Mostra el formulari d'edició per a un llibre específic
     public function edit(Book $book)
     {
-        //
+        return view('books.edit', compact('book'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // Actualitza un llibre específic
     public function update(Request $request, Book $book)
     {
-        //
+        $book->update($request->all());
+        return redirect()->route('books.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // Elimina un llibre específic
     public function destroy(Book $book)
     {
-        //
+        $book->delete();
+        return redirect()->route('books.index');
     }
 }

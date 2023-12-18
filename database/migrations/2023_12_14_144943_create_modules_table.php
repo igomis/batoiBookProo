@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('modules', function (Blueprint $table) {
             $table->string('code', 12)->primary();
-            $table->string('cliteral', 30);
-            $table->string('vliteral', 30);
+            $table->string('cliteral', 80);
+            $table->string('vliteral', 80);
             $table->foreignId('course_id')->constrained('courses');
             $table->timestamps();
         });

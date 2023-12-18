@@ -29,3 +29,15 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+// Rutes per a llibres
+Route::Resource('books', BookController::class);
+
+// Rutes per a cursos
+Route::Resource('courses', CourseController::class);
+
+// Rutes per a famílies
+Route::Resource('families', FamilyController::class);
+
+// Rutes per a mòduls
+Route::Resource('modules', ModuleController::class);
