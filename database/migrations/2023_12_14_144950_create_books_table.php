@@ -21,7 +21,7 @@ return new class extends Migration
             $table->smallInteger('pages')->nullable();
             $table->enum('status', ['new', 'good', 'used', 'bad'])->default('good');
             $table->string('photo', 200);
-            $table->text('comments');
+            $table->text('comments')->nullable();
             $table->date('soldDate')->nullable();
             $table->timestamps();
         });

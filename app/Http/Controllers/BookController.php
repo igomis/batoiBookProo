@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BookRequest;
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
     // Mostra la llista de llibres
     public function index()
     {
-        $books = Book::paginate(20);
+        $books = Auth::user()->administrador? Book::paginate(20) : Book::where('user_id', Auth::user()->id)->paginate(20);
         return view('books.index', compact('books'));
     }
 
@@ -21,10 +24,20 @@ class BookController extends Controller
     }
 
     // Emmagatzema un nou llibre
-    public function store(Request $request)
+    public function store(BookRequest $request)
     {
-        Book::create($request->all());
-        return redirect()->route('books.index');
+        $validatedData = $request->toArray();
+
+        if ($request->hasFile('photo')) {
+            $path = $request->file('photo')->store('public/books');
+            $validatedData['photo'] = Storage::url($path);
+        }
+        $validatedData['user_id'] = Auth::user()->id;
+
+        $book = Book::create($validatedData);
+
+        // Redirigeix o retorna una resposta segons siga necessari
+        return redirect()->route('books.show', $book->id);
     }
 
     // Mostra un llibre específic
@@ -40,10 +53,19 @@ class BookController extends Controller
     }
 
     // Actualitza un llibre específic
-    public function update(Request $request, Book $book)
+    public function update(BookRequest $request, Book $book)
     {
-        $book->update($request->all());
-        return redirect()->route('books.index');
+        $validatedData = $request->toArray();
+
+        if ($request->hasFile('photo')) {
+            $path = $request->file('photo')->store('public/books');
+            $validatedData['photo'] = Storage::url($path);
+        }
+
+        // Redirigeix o retorna una resposta segons siga necessari
+        $book->update($validatedData);
+        return redirect()->route('books.show', $book->id);
+
     }
 
     // Elimina un llibre específic

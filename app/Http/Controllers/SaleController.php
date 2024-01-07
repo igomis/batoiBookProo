@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sale;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SaleController extends Controller
 {
@@ -12,7 +13,14 @@ class SaleController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+        $sales = $user->administrador?
+            Sale::paginate() :
+            Sale::whereHas('book', function ($query) use ($user) {
+                $query->where('user_id', $user->id);
+            })->paginate();
+        return view('sales.index', compact('sales'));
+
     }
 
     /**

@@ -9,13 +9,14 @@ class Sale extends Model
 {
     use HasFactory;
 
-    public function book()
+    public function Book()
     {
         return $this->belongsTo(Book::class);
     }
 
-    public function user()
+    public function Comprador()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id');
     }
+
 }

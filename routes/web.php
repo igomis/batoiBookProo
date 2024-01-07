@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OpenAIController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', HomePage::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -41,3 +40,13 @@ Route::Resource('families', FamilyController::class);
 
 // Rutes per a mòduls
 Route::Resource('modules', ModuleController::class);
+// Rutes per a vendes
+Route::Resource('sales', SaleController::class);
+
+// Rutes per a openai
+Route::get('/openai', [OpenAIController::class, 'index'])->name('openai.index');
+
+// Rutes per a google
+
+Route::get('auth/google', 'Auth\LoginController@redirectToGoogle');
+Route::get('auth/google/callback', 'Auth\LoginController@handleGoogleCallback');
