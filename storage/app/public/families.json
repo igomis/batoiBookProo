@@ -1,0 +1,19 @@
+[
+{"type":"header","version":"5.2.1","comment":"Export to JSON plugin for PHPMyAdmin"},
+{"type":"database","name":"prova"},
+{"type":"table","name":"families","database":"prova","data":
+[
+{"id":"1","cliteral":"INGLES","vliteral":"ANGLES"},
+{"id":"2","cliteral":"SERVICIOS A LA COMUNIDAD","vliteral":"SEVEIS A LA COMUNITAT"},
+{"id":"3","cliteral":"IMAGEN PERSONAL","vliteral":"IMATGE PERSONAL"},
+{"id":"5","cliteral":"DEPARTAMENTO ADMINISTRATIVO","vliteral":"DEPARTAMENT ADMINISTRACIÓ"},
+{"id":"6","cliteral":"DEPARTAMENTO SANITARIO","vliteral":"DEPARTAMENT SANITARI"},
+{"id":"9","cliteral":"EXTENSION CULTURAL","vliteral":"EXTENSIO CULTURAL"},
+{"id":"10","cliteral":"HOSTELERIA Y TURISMO","vliteral":"HOSTELERIA I TURISME"},
+{"id":"12","cliteral":"FORMACION Y ORIENTACION LABORA","vliteral":"FORMACIO I ORIENTACIO LABORAL"},
+{"id":"18","cliteral":"ORIENTACION","vliteral":"ORIENTACIO"},
+{"id":"24","cliteral":"DEPARTAMENTO INFORMATICA","vliteral":"DEPARTAMENT INFORMÀTICA"},
+{"id":"25","cliteral":"Seguridad y Medio Ambiente","vliteral":"Seguretat i Medi Ambient"}
+]
+}
+]
