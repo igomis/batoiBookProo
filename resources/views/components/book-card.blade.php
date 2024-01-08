@@ -23,5 +23,13 @@
             {{ $book->comments }}
         </span>
         @endif
+        @if (\Illuminate\Support\Facades\Auth::check())
+            <form class="inline-block" action="{{ route('books.sale', $book) }}" method="POST">
+                @csrf
+                <button type="submit" class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                    Comprar
+                </button>
+            </form>
+        @endif
     </div>
 </div>

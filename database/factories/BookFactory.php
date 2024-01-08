@@ -27,6 +27,7 @@ class BookFactory extends Factory
             'status' => $this->faker->randomElement(['new', 'good', 'used', 'bad']),
             'photo' => $this->faker->imageUrl(), // URL d'imatge fictícia
             'comments' => $this->faker->text,
+            'admes' => true,
         ];
     }
 }

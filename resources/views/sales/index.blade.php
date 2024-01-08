@@ -19,12 +19,24 @@
             <tbody>
             @foreach ($sales as $sale)
                 <tr>
-                    <td class="border px-4 py-2 text-white">{{ $sale->Book->Module->vliteral }}</td>
-                    <td class="border px-4 py-2 text-white">{{ $sale->Book->Module->Course->vliteral }}</td>
-                    <td class="border px-4 py-2 text-white">{{ $sale->Book->price }}</td>
-                    <td class="border px-4 py-2 text-white">{{ $sale->Book->User->name }}</td>
-                    <td class="border px-4 py-2 text-white">{{ $sale->Comprador->name }}</td>
-                    <td class="border px-4 py-2 text-white">{{ $sale->created_at }}</td>
+                    <td class="border px-4 py-2 text-gray-900 dark:text-gray-100">
+                        {{ $sale->Book->Module->vliteral }}
+                    </td>
+                    <td class="border px-4 py-2 text-gray-900 dark:text-gray-100">
+                        {{ $sale->Book->Module->Course->vliteral }}
+                    </td>
+                    <td class="border px-4 py-2 text-gray-900 dark:text-gray-100">
+                        {{ $sale->Book->price }}
+                    </td>
+                    <td class="border px-4 py-2 text-gray-900 dark:text-gray-100">
+                        {{ $sale->Book->User->name }}
+                    </td>
+                    <td class="border px-4 py-2 text-gray-900 dark:text-gray-100">
+                        {{ $sale->Comprador->name }}
+                    </td>
+                    <td class="border px-4 py-2 text-gray-900 dark:text-gray-100">
+                        {{ $sale->created_at }}
+                    </td>
                 </tr>
             @endforeach
             </tbody>

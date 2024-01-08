@@ -26,6 +26,11 @@
                             {{ __('Llistat de vendes') }}
                         </x-nav-link>
                     @endif
+                    @if (Auth::user()->administrador)
+                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                            {{ __('Llistat d\'usuaris') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 

@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BookRequest;
+use App\Mail\PurchaseConfirmationMail;
 use App\Models\Book;
+use App\Models\Sale;
+use App\Notifications\BookNewNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
@@ -35,8 +39,34 @@ class BookController extends Controller
         $validatedData['user_id'] = Auth::user()->id;
 
         $book = Book::create($validatedData);
+        administrador()->notify(new BookNewNotification($book));
+
 
         // Redirigeix o retorna una resposta segons siga necessari
+        return redirect()->route('books.show', $book->id);
+    }
+
+    public function admetre(Book $book)
+    {
+        $book->admes = true;
+        $book->save();
+        return redirect()->route('books.show', $book->id);
+    }
+
+    public function sale(Book $book)
+    {
+        $book->soldDate = now()->format('Y-m-d');
+        $book->save();
+        $sale = new Sale([
+            'book_id' => $book->id,
+            'user_id' => Auth::user()->id,
+            'date' => $book->soldDate,
+            'status' => 1
+        ]);
+        $sale->save();
+        $venedor = $book->User;
+        Mail::to($venedor->email)->send(new PurchaseConfirmationMail($sale));
+
         return redirect()->route('books.show', $book->id);
     }
 

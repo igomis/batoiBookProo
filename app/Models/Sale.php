@@ -9,6 +9,13 @@ class Sale extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'book_id',
+        'user_id',
+        'date',
+        'status',
+    ];
+
     public function Book()
     {
         return $this->belongsTo(Book::class);
