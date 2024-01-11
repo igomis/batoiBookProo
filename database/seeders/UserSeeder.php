@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Http;
 
 class UserSeeder extends Seeder
 {
@@ -13,6 +14,18 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        $response = Http::get('https://swapi.dev/api/people/');
+        if ($response->successful()) {
+            $people = $response->json()['results'];
+            foreach ($people as $person) {
+                User::create([
+                    'name' => $person['name'],
+                    'email' => $person['name'].'@example.com',
+                    'password' => bcrypt('1234'),
+                    'administrador' => false,
+                ]);
+            }
+        }
         // Crear un administrador
         User::create([
             'name' => 'Administrador',
@@ -26,5 +39,6 @@ class UserSeeder extends Seeder
             'password' => bcrypt('1234'),
             'administrador' => false,
         ]);
+
     }
 }
