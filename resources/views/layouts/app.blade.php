@@ -31,6 +31,9 @@
             <main>
                 {{ $slot }}
             </main>
+            <!-- Alerts -->
+            @include('partials.alerts')
+
         </div>
     </body>
 </html>
