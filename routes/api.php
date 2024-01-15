@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\FamilyController;
+use App\Http\Controllers\API\LoginController;
 use App\Http\Controllers\Api\ModuleController;
 use App\Http\Controllers\Api\SaleController;
 use App\Http\Controllers\Api\UserController;
@@ -27,7 +28,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('modules',ModuleController::class);
 Route::apiResource('courses',CourseController::class);
 Route::apiResource('families',FamilyController::class);
-Route::apiResource('books',BookController::class);
+Route::apiResource('books',BookController::class)->middleware('auth:sanctum');
 Route::apiResource('users',UserController::class);
 Route::apiResource('sales',SaleController::class);
+Route::post('/login', [LoginController::class, 'login']);
+
 

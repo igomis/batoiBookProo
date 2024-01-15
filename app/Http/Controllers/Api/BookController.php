@@ -9,6 +9,7 @@ use App\Http\Resources\BookResource;
 use App\Models\Book;
 use App\Notifications\BookNewNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
@@ -33,6 +34,7 @@ class BookController extends Controller
             $path = $request->file('photo')->store('public/books');
             $validatedData['photo'] = Storage::url($path);
         }
+        $validatedData['user_id'] = Auth::user()->id;
 
         $book = Book::create($validatedData);
         administrador()->notify(new BookNewNotification($book));
