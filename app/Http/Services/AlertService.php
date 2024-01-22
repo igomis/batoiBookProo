@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Service;
+namespace App\Http\Services;
 
-class Alert
+class AlertService
 {
     public static function __callStatic($name, $arguments)
     {
@@ -14,10 +14,10 @@ class Alert
         ];
         try {
             if (!in_array($name, ['success', 'error', 'warning', 'info'])) {
-                throw new \Exception('Alert type not allowed');
+                throw new \Exception('AlertService type not allowed');
             }
             if (empty($arguments)) {
-                throw new \Exception('Alert message is required');
+                throw new \Exception('AlertService message is required');
             }
             if (count($arguments) > 1) {
                 throw new \Exception('Too many arguments');

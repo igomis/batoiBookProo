@@ -23,8 +23,26 @@ class ChatGTPService
         ]);
     }
 
-    public function post(string $url, array $options = [])
-    {
-        return $this->client->post($url, $options);
+    public function response($question){
+        try {
+            $response = $this->client->post('chat/completions', [
+                'json' => [
+                    'model' => 'gpt-3.5-turbo',
+                    'messages' => [
+                        ['role' => 'system', 'content' => 'Ets un fan del Barça.'],
+                        ['role' => 'user', 'content' => $question],
+                        // La resposta de l'assistant es genera automàticament, no cal proporcionar-la
+                    ],
+                    'max_tokens' => 250,
+                ],
+            ]);
+
+            $body = $response->getBody();
+            $content = json_decode($body->getContents(), true);
+            return $content['choices'];
+        } catch (\Exception $e) {
+            // Gestiona l'error
+            echo "Error: " . $e->getMessage();
+        }
     }
 }

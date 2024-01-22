@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BookRequest;
+use App\Http\Services\AlertService;
 use App\Mail\PurchaseConfirmationMail;
 use App\Models\Book;
 use App\Models\Sale;
 use App\Notifications\BookNewNotification;
-use App\Service\Alert;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -41,7 +40,7 @@ class BookController extends Controller
 
         $book = Book::create($validatedData);
         administrador()->notify(new BookNewNotification($book));
-        Alert::info('Llibre creat correctament');
+        AlertService::info('Llibre creat correctament');
 
 
         // Redirigeix o retorna una resposta segons siga necessari
@@ -96,7 +95,7 @@ class BookController extends Controller
 
         // Redirigeix o retorna una resposta segons siga necessari
         $book->update($validatedData);
-        Alert::info('Llibre actualitzat correctament');
+        AlertService::info('Llibre actualitzat correctament');
         return redirect()->route('books.show', $book->id);
 
     }
@@ -105,7 +104,7 @@ class BookController extends Controller
     public function destroy(Book $book)
     {
         $book->delete();
-        Alert::warning('Llibre eliminat correctament');
+        AlertService::warning('Llibre eliminat correctament');
         return redirect()->route('books.index');
     }
 }

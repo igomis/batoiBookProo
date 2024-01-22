@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Controllers\BookController;
-use App\Http\Controllers\OpenAIController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ProfileController;
+use App\Service\OpenAIService;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,8 +54,9 @@ Route::Resource('modules', ModuleController::class);
 Route::Resource('sales', SaleController::class);
 
 // Rutes per a openai
-Route::get('/openai', [OpenAIController::class, 'index'])->name('openai.index');
-
+Route::get('/openai', [OpenAIService::class, 'index'])->name('openai.index');
+Route::get('/chat', [ChatController::class, 'index']);
+Route::post('/chat/send', [ChatController::class, 'sendMessage']);
 // Rutes per a google
 
 Route::get('auth/google', 'Auth\LoginController@redirectToGoogle');
