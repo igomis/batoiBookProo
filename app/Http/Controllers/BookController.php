@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BookRequest;
 use App\Http\Services\AlertService;
+use App\Http\Services\ChatGTPService;
 use App\Mail\PurchaseConfirmationMail;
 use App\Models\Book;
 use App\Models\Sale;
@@ -74,7 +75,16 @@ class BookController extends Controller
     // Mostra un llibre específic
     public function show(Book $book)
     {
-        return view('books.show', compact('book'));
+        $response = new ChatGTPService();
+        $reply = $response->response("Fes un index d'un llibre de Formació Professional amb títol: ".
+            $book->Module->vliteral);
+        $message = '';
+        foreach ($reply as $r){
+            if ($r['message']['role'] == 'assistant') {
+                $message .= $r['message']['content'];
+            }
+        }
+        return view('books.show', compact('book','message'));
     }
 
     // Mostra el formulari d'edició per a un llibre específic

@@ -7,6 +7,7 @@
     <div class="container mx-auto px-4">
         <div class="mb-4">
             <x-book-card book="{{$book->id}}" />
+            <p>{{$message}}</p>
         </div>
     </div>
 </x-app-layout>
